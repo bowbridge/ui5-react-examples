@@ -1,21 +1,12 @@
 import React from "react"
-import {
-  FlexBox,
-  FlexBoxAlignItems,
-  FlexBoxJustifyContent,
-  Title,
-} from "@ui5/webcomponents-react"
+import { spacing } from "@ui5/webcomponents-react-base"
+import { AllElements } from "../components/forms/allelements/AllElements"
 
 const Dashboard = () => {
   return (
-    <FlexBox
-      fitContainer
-      style={{ height: "95vh" }}
-      justifyContent={FlexBoxJustifyContent.Center}
-      alignItems={FlexBoxAlignItems.Center}
-    >
-      <Title>Dashboard</Title>
-    </FlexBox>
+    <div style={{ ...spacing.sapUiContentPadding }}>
+      <AllElements />
+    </div>
   )
 }
 

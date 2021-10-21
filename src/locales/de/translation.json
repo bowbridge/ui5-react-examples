@@ -1,9 +1,9 @@
 {
   "app.generics.close": "Schließen",
-  "helmet.title.app": "Ui5 Webcomponents for React Template",
+  "helmet.title.app": "Ui5 Webcomponents for React",
   "helmet.title.error": "Buggy Component",
   "helmet.title.notfound": "Leider Nicht gefunden",
-  "shell.title": "Ui5 Webcomponents for React Template-DE",
+  "shell.title": "Ui5 Webcomponents for React - Examples",
   "shell.logo.alt": "App Logo",
   "shell.button.user.settings": "Benutzereinstellungen",
   "shell.button.user.settings.item.themeSwitch": "Theme",

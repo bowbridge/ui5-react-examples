@@ -2,15 +2,21 @@ import { generatePath, ExtractRouteParams } from "react-router"
 
 export const ROUTES = {
   HOME: "/",
-  TODO_DETAIL: "/todo/detail/:id",
-  TODO_EDIT: "/todo/edit/:id",
   DASHBOARD: "/dashboard",
   LOGINPAGE: "/login",
+  SIMPLEFORM: "/simpleform",
+  TODO_DETAIL: "/todo/detail/:id",
+  TODO_EDIT: "/todo/edit/:id",
   NOT_FOUND: "/notFound",
   ANY: "/*",
 }
 
-export type ROUTEKEYS = keyof Pick<typeof ROUTES, "TODO_DETAIL" | "TODO_EDIT">
+export type ROUTEKEYS = keyof typeof ROUTES
+
+export type PARTIALROUTEKEYS = keyof Pick<
+  typeof ROUTES,
+  "TODO_DETAIL" | "TODO_EDIT"
+>
 
 /**
  * A helper method to replace parameter placeholders in a string.
@@ -23,7 +29,7 @@ export type ROUTEKEYS = keyof Pick<typeof ROUTES, "TODO_DETAIL" | "TODO_EDIT">
  * @throws Will throw a TypeError if provided params and path don’t match
  */
 export const getRoute = (
-  key: ROUTEKEYS,
+  key: PARTIALROUTEKEYS,
   params: ExtractRouteParams<any>
 ): string => {
   return generatePath(ROUTES[key], params)

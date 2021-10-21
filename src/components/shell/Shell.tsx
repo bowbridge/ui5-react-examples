@@ -13,10 +13,12 @@ import {
   Icon,
   Popover,
   PopoverPlacementType,
+  ProductSwitch,
+  ProductSwitchItem,
   Text,
 } from "@ui5/webcomponents-react"
 import { useHistory } from "react-router-dom"
-import { ROUTES } from "../../routes/Routes"
+import { ROUTES, ROUTEKEYS } from "../../routes/Routes"
 import { Ui5PopoverDomRef } from "@ui5/webcomponents-react/interfaces/Ui5PopoverDomRef"
 import { ThemingParameters } from "@ui5/webcomponents-react-base/dist/ThemingParameters"
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch"
@@ -28,7 +30,15 @@ interface ShellProps extends ShellBarPropTypes {}
 
 const Shell = ({ title, ...props }: ShellProps) => {
   const popoverConfigItemsRef = useRef<Ui5PopoverDomRef>(null)
+  const productSwitchPopoverRef = useRef<Ui5PopoverDomRef>(null)
   const { t } = useTranslation()
+
+  const history = useHistory()
+
+  const productSwitchLinkHanlder = (key: ROUTEKEYS) => {
+    productSwitchPopoverRef.current?.close()
+    history.push(ROUTES[key])
+  }
 
   const popoverItems = useMemo(
     () => [
@@ -46,7 +56,6 @@ const Shell = ({ title, ...props }: ShellProps) => {
     [t]
   )
 
-  const history = useHistory()
   return (
     <>
       <ShellBar
@@ -67,6 +76,11 @@ const Shell = ({ title, ...props }: ShellProps) => {
         onProfileClick={(e) => {
           const element = e as CustomEvent
           popoverConfigItemsRef.current?.showAt(element.detail.targetRef)
+        }}
+        showProductSwitch
+        onProductSwitchClick={(e) => {
+          const element = e as CustomEvent
+          productSwitchPopoverRef.current?.showAt(element.detail.targetRef)
         }}
         {...props}
       />
@@ -95,6 +109,35 @@ const Shell = ({ title, ...props }: ShellProps) => {
             </FlexBox>
           </CustomListItem>
         ))}
+      </Popover>
+      <Popover
+        style={{ width: "auto", height: "auto" }}
+        ref={productSwitchPopoverRef}
+        placementType={PopoverPlacementType.Bottom}
+      >
+        <ProductSwitch>
+          <ProductSwitchItem
+            icon='bbyd-dashboard'
+            subtitleText=''
+            titleText='All Elements'
+            onClick={() => productSwitchLinkHanlder("HOME")}
+          />
+          <ProductSwitchItem
+            icon='visits'
+            onClick={() => {
+              productSwitchLinkHanlder("LOGINPAGE")
+            }}
+            subtitleText=''
+            titleText='Login Page'
+          />
+
+          <ProductSwitchItem
+            icon='form'
+            subtitleText=''
+            titleText='Simple Form'
+            onClick={() => productSwitchLinkHanlder("SIMPLEFORM")}
+          />
+        </ProductSwitch>
       </Popover>
     </>
   )
