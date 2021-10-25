@@ -118,24 +118,31 @@ const Shell = ({ title, ...props }: ShellProps) => {
         <ProductSwitch>
           <ProductSwitchItem
             icon='bbyd-dashboard'
-            subtitleText=''
+            subtitleText='Generated from Object'
             titleText='All Elements'
             onClick={() => productSwitchLinkHanlder("HOME")}
           />
+
           <ProductSwitchItem
             icon='visits'
             onClick={() => {
               productSwitchLinkHanlder("LOGINPAGE")
             }}
-            subtitleText=''
-            titleText='Login Page'
+            subtitleText='Generated from Object'
+            titleText='Login Form'
           />
 
           <ProductSwitchItem
             icon='form'
-            subtitleText=''
+            subtitleText='Generated from Object'
             titleText='Simple Form'
             onClick={() => productSwitchLinkHanlder("SIMPLEFORM")}
+          />
+          <ProductSwitchItem
+            icon='step'
+            subtitleText=''
+            titleText='Wizard Form'
+            onClick={() => productSwitchLinkHanlder("WIZARDFORM")}
           />
         </ProductSwitch>
       </Popover>

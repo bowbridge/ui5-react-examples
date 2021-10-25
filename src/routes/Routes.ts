@@ -5,6 +5,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   LOGINPAGE: "/login",
   SIMPLEFORM: "/simpleform",
+  WIZARDFORM: "/wizardform",
   TODO_DETAIL: "/todo/detail/:id",
   TODO_EDIT: "/todo/edit/:id",
   NOT_FOUND: "/notFound",
