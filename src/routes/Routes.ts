@@ -2,6 +2,7 @@ import { generatePath, ExtractRouteParams } from "react-router"
 
 export const ROUTES = {
   HOME: "/",
+  TELEPORT: "/teleport",
   DASHBOARD: "/dashboard",
   LOGINPAGE: "/login",
   SIMPLEFORM: "/simpleform",

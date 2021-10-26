@@ -1143,10 +1143,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bowbridge/ui5-react-toolkit@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@bowbridge/ui5-react-toolkit/-/ui5-react-toolkit-1.2.0.tgz#145a47cce20bb62b4e23be2600f9e2cbb58621e2"
-  integrity sha512-sTs3fFaIFllhtociahmhFZN6qnhhR8hcbS4OqU0+VHGxsNh2gc+5tMUdVFvFBzYtLC+Q8jow66ZbcJ6WgQZ1ow==
+"@bowbridge/ui5-react-toolkit@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@bowbridge/ui5-react-toolkit/-/ui5-react-toolkit-1.2.1.tgz#8ec17242b7fab61500a0c8269caf1b09b6f1fa72"
+  integrity sha512-3SSl8CfBGRF8I5hYIndYbJ/YXnhwjRHqj/tEjNJ6tpj7o5hFxFJowKmlBEedudyYRj0i+3eONDL1gcjuRlNQ4Q==
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"

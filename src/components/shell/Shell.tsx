@@ -144,6 +144,12 @@ const Shell = ({ title, ...props }: ShellProps) => {
             titleText='Wizard Form'
             onClick={() => productSwitchLinkHanlder("WIZARDFORM")}
           />
+          <ProductSwitchItem
+            icon='attachment'
+            subtitleText='Modals & Popovers'
+            titleText='Teleport'
+            onClick={() => productSwitchLinkHanlder("TELEPORT")}
+          />
         </ProductSwitch>
       </Popover>
     </>
