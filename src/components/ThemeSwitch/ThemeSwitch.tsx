@@ -14,25 +14,25 @@ const style = {
 const themeOptions = [
   {
     value: "sap_fiori_3",
-    title: "shell.button.user.settings.item.themeSwitch.option.default",
+    title: "shell.button.app.settings.item.themeSwitch.option.default",
   },
   {
     value: "sap_fiori_3_dark",
-    title: "shell.button.user.settings.item.themeSwitch.option.dark",
+    title: "shell.button.app.settings.item.themeSwitch.option.dark",
   },
   {
     value: "sap_belize",
-    title: "shell.button.user.settings.item.themeSwitch.option.belize",
+    title: "shell.button.app.settings.item.themeSwitch.option.belize",
   },
   {
     value: "sap_fiori_3_hcb",
     title:
-      "shell.button.user.settings.item.themeSwitch.option.highContrastBlack",
+      "shell.button.app.settings.item.themeSwitch.option.highContrastBlack",
   },
   {
     value: "sap_fiori_3_hcw",
     title:
-      "shell.button.user.settings.item.themeSwitch.option.highContrastWhite",
+      "shell.button.app.settings.item.themeSwitch.option.highContrastWhite",
   },
 ]
 

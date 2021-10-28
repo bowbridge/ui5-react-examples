@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from "react"
+import React from "react"
 import {
   ShellBar,
   ShellBarPropTypes,
@@ -6,55 +6,27 @@ import {
 import {
   Avatar,
   AvatarShape,
-  CustomListItem,
-  FlexBox,
-  FlexBoxAlignItems,
-  FlexBoxJustifyContent,
   Icon,
-  Popover,
-  PopoverPlacementType,
-  ProductSwitch,
-  ProductSwitchItem,
-  Text,
+  ShellBarItem,
 } from "@ui5/webcomponents-react"
-import { useHistory } from "react-router-dom"
-import { ROUTES, ROUTEKEYS } from "../../routes/Routes"
-import { Ui5PopoverDomRef } from "@ui5/webcomponents-react/interfaces/Ui5PopoverDomRef"
+
+import { ROUTES } from "../../routes/Routes"
 import { ThemingParameters } from "@ui5/webcomponents-react-base/dist/ThemingParameters"
-import ThemeSwitch from "../ThemeSwitch/ThemeSwitch"
-import { useTranslation } from "react-i18next"
-import { spacing } from "@ui5/webcomponents-react-base"
-import LanguageSwitch from "../LanguageSwitch/LanguageSwitch"
+import { useHistory } from "react-router-dom"
+import { getIcon } from "../../util/sapicons"
+import { useTeleport } from "@bowbridge/ui5-react-toolkit"
+import { UserConfigActionSheet } from "../Popover/UserConfigActionSheet"
+import { LayoutConfigPopover } from "../Popover/LayoutConfigPopover"
+import { ProductSwitchPopover } from "../Popover/ProductSwitchPopover"
 
 interface ShellProps extends ShellBarPropTypes {}
 
 const Shell = ({ title, ...props }: ShellProps) => {
-  const popoverConfigItemsRef = useRef<Ui5PopoverDomRef>(null)
-  const productSwitchPopoverRef = useRef<Ui5PopoverDomRef>(null)
-  const { t } = useTranslation()
-
   const history = useHistory()
 
-  const productSwitchLinkHanlder = (key: ROUTEKEYS) => {
-    productSwitchPopoverRef.current?.close()
-    history.push(ROUTES[key])
-  }
-
-  const popoverItems = useMemo(
-    () => [
-      {
-        description: t("shell.button.user.settings.item.languageSwitch"),
-        icon: "user-settings",
-        children: <LanguageSwitch />,
-      },
-      {
-        description: t("shell.button.user.settings.item.themeSwitch"),
-        icon: "customize",
-        children: <ThemeSwitch />,
-      },
-    ],
-    [t]
-  )
+  const UserConfigActionSheetHandler = useTeleport()
+  const LayoutConfigPopoverHandler = useTeleport()
+  const ProductSwitchPopoverHandler = useTeleport()
 
   return (
     <>
@@ -63,7 +35,7 @@ const Shell = ({ title, ...props }: ShellProps) => {
         style={{ position: "fixed", width: "100%", zIndex: 100 }}
         logo={
           <Icon
-            name='checklist'
+            name={getIcon("checklist")}
             style={{
               height: "1.75rem",
               width: "1.75rem",
@@ -72,86 +44,53 @@ const Shell = ({ title, ...props }: ShellProps) => {
           />
         }
         onLogoClick={() => history.push(ROUTES.HOME)}
-        profile={<Avatar icon='customer' shape={AvatarShape.Circle} />}
+        profile={
+          <Avatar icon={getIcon("customer")} shape={AvatarShape.Circle} />
+        }
         onProfileClick={(e) => {
-          const element = e as CustomEvent
-          popoverConfigItemsRef.current?.showAt(element.detail.targetRef)
+          const targetRef = e.detail.targetRef as HTMLElement
+          UserConfigActionSheetHandler.openPopover(targetRef)
         }}
         showProductSwitch
         onProductSwitchClick={(e) => {
-          const element = e as CustomEvent
-          productSwitchPopoverRef.current?.showAt(element.detail.targetRef)
+          const targetRef = e.detail.targetRef as HTMLElement
+          ProductSwitchPopoverHandler.openPopover(targetRef)
         }}
         {...props}
-      />
+      >
+        <ShellBarItem
+          icon={getIcon("customize")}
+          onItemClick={(e) => {
+            const targetRef = e.detail.targetRef as HTMLElement
+            LayoutConfigPopoverHandler.openPopover(targetRef)
+          }}
+        />
+      </ShellBar>
       <div style={{ paddingTop: "44px" }} />
-      <Popover
-        style={{ width: "350px" }}
-        ref={popoverConfigItemsRef}
-        placementType={PopoverPlacementType.Bottom}
-        headerText={t("shell.button.user.settings")}
-      >
-        {popoverItems.map((item, index) => (
-          <CustomListItem key={index}>
-            <FlexBox
-              justifyContent={FlexBoxJustifyContent.SpaceBetween}
-              alignItems={FlexBoxAlignItems.Center}
-              fitContainer
-            >
-              <FlexBox style={{ width: "100%" }}>
-                <Icon style={spacing.sapUiTinyMarginEnd} name={item.icon} />
-                <Text style={spacing.sapUiTinyMarginEnd}>
-                  {item.description}
-                </Text>
-              </FlexBox>
-
-              <div>{item.children}</div>
-            </FlexBox>
-          </CustomListItem>
-        ))}
-      </Popover>
-      <Popover
-        style={{ width: "auto", height: "auto" }}
-        ref={productSwitchPopoverRef}
-        placementType={PopoverPlacementType.Bottom}
-      >
-        <ProductSwitch>
-          <ProductSwitchItem
-            icon='bbyd-dashboard'
-            subtitleText='Generated from Object'
-            titleText='All Elements'
-            onClick={() => productSwitchLinkHanlder("HOME")}
+      {UserConfigActionSheetHandler.isOpen && (
+        <UserConfigActionSheetHandler.Teleport>
+          <UserConfigActionSheet
+            popoverRef={UserConfigActionSheetHandler.popoverRef}
+            onClose={UserConfigActionSheetHandler.close}
           />
-
-          <ProductSwitchItem
-            icon='visits'
-            onClick={() => {
-              productSwitchLinkHanlder("LOGINPAGE")
-            }}
-            subtitleText='Generated from Object'
-            titleText='Login Form'
+        </UserConfigActionSheetHandler.Teleport>
+      )}
+      {LayoutConfigPopoverHandler.isOpen && (
+        <LayoutConfigPopoverHandler.Teleport>
+          <LayoutConfigPopover
+            popoverRef={LayoutConfigPopoverHandler.popoverRef}
+            onClose={LayoutConfigPopoverHandler.close}
           />
-
-          <ProductSwitchItem
-            icon='form'
-            subtitleText='Generated from Object'
-            titleText='Simple Form'
-            onClick={() => productSwitchLinkHanlder("SIMPLEFORM")}
+        </LayoutConfigPopoverHandler.Teleport>
+      )}
+      {ProductSwitchPopoverHandler.isOpen && (
+        <ProductSwitchPopoverHandler.Teleport>
+          <ProductSwitchPopover
+            popoverRef={ProductSwitchPopoverHandler.popoverRef}
+            onClose={ProductSwitchPopoverHandler.close}
           />
-          <ProductSwitchItem
-            icon='step'
-            subtitleText=''
-            titleText='Wizard Form'
-            onClick={() => productSwitchLinkHanlder("WIZARDFORM")}
-          />
-          <ProductSwitchItem
-            icon='attachment'
-            subtitleText='Modals & Popovers'
-            titleText='Teleport'
-            onClick={() => productSwitchLinkHanlder("TELEPORT")}
-          />
-        </ProductSwitch>
-      </Popover>
+        </ProductSwitchPopoverHandler.Teleport>
+      )}
     </>
   )
 }

@@ -10,6 +10,7 @@ const TeleportPage = lazy(() => import("../pages/TeleportPage"))
 const Dashboard = lazy(() => import("../pages/Dashboard"))
 const SimpleForm = lazy(() => import("../pages/SimpleForm"))
 const WizardForm = lazy(() => import("../pages/WizardFormPage"))
+const ToastSample = lazy(() => import("../pages/ToastSample"))
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
       <Switch>
         <Redirect path={ROUTES.HOME} exact to={ROUTES.DASHBOARD} />
         <Route path={ROUTES.TELEPORT} exact component={TeleportPage} />
+        <Route path={ROUTES.TOAST} exact component={ToastSample} />
         <Route path={ROUTES.LOGINPAGE} exact component={LoginPage} />
         <Route path={ROUTES.WIZARDFORM} exact component={WizardForm} />
         <Route path={ROUTES.SIMPLEFORM} exact component={SimpleForm} />

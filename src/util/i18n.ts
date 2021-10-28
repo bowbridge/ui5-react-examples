@@ -21,17 +21,17 @@ export const SUPPORTED_LANGUAGES: SupportedLanguage = {
   en: {
     translation: translationEN,
     code: "en-US",
-    textKey: "shell.button.user.settings.item.languageSwitch.en",
+    textKey: "shell.button.app.settings.item.languageSwitch.en",
   },
   pt: {
     translation: translationPT,
     code: "pt",
-    textKey: "shell.button.user.settings.item.languageSwitch.pt",
+    textKey: "shell.button.app.settings.item.languageSwitch.pt",
   },
   de: {
     translation: translationDE,
     code: "de",
-    textKey: "shell.button.user.settings.item.languageSwitch.de",
+    textKey: "shell.button.app.settings.item.languageSwitch.de",
   },
 }
 
