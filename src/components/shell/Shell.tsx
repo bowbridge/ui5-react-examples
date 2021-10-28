@@ -65,6 +65,16 @@ const Shell = ({ title, ...props }: ShellProps) => {
             LayoutConfigPopoverHandler.openPopover(targetRef)
           }}
         />
+        <ShellBarItem
+          icon={getIcon("source-code")}
+          tooltip='Goto Github'
+          onItemClick={() =>
+            window.open(
+              "https://github.com/bowbridge/ui5-react-examples",
+              "_blank"
+            )
+          }
+        />
       </ShellBar>
       <div style={{ paddingTop: "44px" }} />
       {UserConfigActionSheetHandler.isOpen && (
